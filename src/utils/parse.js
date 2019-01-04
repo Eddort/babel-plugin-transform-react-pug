@@ -1,7 +1,7 @@
 // @flow
 
 import type Context from '../context';
-import {transform} from '@babel/standalone';
+import {transform} from 'babel-standalone';
 
 export default function parse(src: string, context: Context): Array<Statement> {
   try {
