@@ -1,12 +1,14 @@
 import common from 'common-prefix';
-import parsePug from './parse-pug';
+import pugParserDefault from './parse-pug';
 import Context from './context';
 import {visitExpression} from './visitors';
 import {getInterpolatedTemplate} from './utils/interpolation';
 import {buildJSXFragment} from './utils/jsx';
 import {setBabelTypes} from './lib/babel-types';
 
-export default function(babel) {
+const babelPlugin = function(babel, pugParser) {
+  let parsePug = pugParserDefault;
+  if (pugParser) parsePug = pugParser;
   const {types: t} = babel;
 
   setBabelTypes(t);
@@ -66,4 +68,11 @@ export default function(babel) {
       },
     },
   };
-}
+};
+
+export default (babel, pugParser) => {
+  if (pugParser) {
+    return babelPlugin.call(null, babel);
+  }
+  return babelPlugin.call(null, babel, pugParser);
+};
