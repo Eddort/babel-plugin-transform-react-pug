@@ -5,11 +5,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = parse;
 
-var _standalone = require('@babel/standalone');
+var _babelStandalone = require('babel-standalone');
 
 function parse(src, context) {
   try {
-    return (0, _standalone.transform)(src, {
+    return (0, _babelStandalone.transform)(src, {
       ast: true,
       babelrc: false,
       code: false,

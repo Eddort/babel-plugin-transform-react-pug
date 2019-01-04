@@ -4,9 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-exports.default = function (babel, pugParser) {
-  var parsePug = _parsePug2.default;
-  if (pugParser) parsePug = pugParser;
+exports.default = function (babel, parsePug) {
   var t = babel.types;
 
 
@@ -73,10 +71,6 @@ exports.default = function (babel, pugParser) {
 var _commonPrefix = require('common-prefix');
 
 var _commonPrefix2 = _interopRequireDefault(_commonPrefix);
-
-var _parsePug = require('./parse-pug');
-
-var _parsePug2 = _interopRequireDefault(_parsePug);
 
 var _context = require('./context');
 
