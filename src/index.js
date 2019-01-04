@@ -6,7 +6,7 @@ import {getInterpolatedTemplate} from './utils/interpolation';
 import {buildJSXFragment} from './utils/jsx';
 import {setBabelTypes} from './lib/babel-types';
 
-const babelPlugin = function(babel, pugParser) {
+export default function(babel, pugParser) {
   let parsePug = pugParserDefault;
   if (pugParser) parsePug = pugParser;
   const {types: t} = babel;
@@ -68,11 +68,4 @@ const babelPlugin = function(babel, pugParser) {
       },
     },
   };
-};
-
-export default (babel, pugParser) => {
-  if (pugParser) {
-    return babelPlugin.call(null, babel);
-  }
-  return babelPlugin.call(null, babel, pugParser);
-};
+}
