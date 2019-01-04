@@ -5,7 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (str) {
-  console.log(str)
   return _pugFilters2.default.handleFilters((0, _pugParser2.default)((0, _pugStripComments2.default)((0, _pugLexer2.default)(str), { stripUnbuffered: true, stripBuffered: true })));
 };
 

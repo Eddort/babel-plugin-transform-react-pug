@@ -4,7 +4,31 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-exports.default = function (babel) {
+var _commonPrefix = require('common-prefix');
+
+var _commonPrefix2 = _interopRequireDefault(_commonPrefix);
+
+var _parsePug = require('./parse-pug');
+
+var _parsePug2 = _interopRequireDefault(_parsePug);
+
+var _context = require('./context');
+
+var _context2 = _interopRequireDefault(_context);
+
+var _visitors = require('./visitors');
+
+var _interpolation = require('./utils/interpolation');
+
+var _jsx = require('./utils/jsx');
+
+var _babelTypes = require('./lib/babel-types');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var babelPlugin = function babelPlugin(babel, pugParser) {
+  var parsePug = _parsePug2.default;
+  if (pugParser) parsePug = pugParser;
   var t = babel.types;
 
 
@@ -12,7 +36,6 @@ exports.default = function (babel) {
 
   function isReactPugReference(node) {
     // TODO: do this better
-    console.log(t.isIdentifier(node, { name: 'pug' }))
     return t.isIdentifier(node, { name: 'pug' });
   }
 
@@ -50,7 +73,7 @@ exports.default = function (babel) {
             return line.substr(minIndent.length);
           }).join('\n');
 
-          var ast = (0, _parsePug2.default)(src);
+          var ast = parsePug(src);
           var context = _context2.default.create(this.file, path, interpolationRef);
           var transformed = ast.nodes.map(function (node) {
             return (0, _visitors.visitExpression)(node, context);
@@ -69,24 +92,9 @@ exports.default = function (babel) {
   };
 };
 
-var _commonPrefix = require('common-prefix');
-
-var _commonPrefix2 = _interopRequireDefault(_commonPrefix);
-
-var _parsePug = require('./parse-pug');
-
-var _parsePug2 = _interopRequireDefault(_parsePug);
-
-var _context = require('./context');
-
-var _context2 = _interopRequireDefault(_context);
-
-var _visitors = require('./visitors');
-
-var _interpolation = require('./utils/interpolation');
-
-var _jsx = require('./utils/jsx');
-
-var _babelTypes = require('./lib/babel-types');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+exports.default = function (babel, pugParser) {
+  if (pugParser) {
+    return babelPlugin.call(null, babel);
+  }
+  return babelPlugin.call(null, babel, pugParser);
+};
