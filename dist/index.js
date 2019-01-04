@@ -4,29 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _commonPrefix = require('common-prefix');
-
-var _commonPrefix2 = _interopRequireDefault(_commonPrefix);
-
-var _parsePug = require('./parse-pug');
-
-var _parsePug2 = _interopRequireDefault(_parsePug);
-
-var _context = require('./context');
-
-var _context2 = _interopRequireDefault(_context);
-
-var _visitors = require('./visitors');
-
-var _interpolation = require('./utils/interpolation');
-
-var _jsx = require('./utils/jsx');
-
-var _babelTypes = require('./lib/babel-types');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var babelPlugin = function babelPlugin(babel, pugParser) {
+exports.default = function (babel, pugParser) {
   var parsePug = _parsePug2.default;
   if (pugParser) parsePug = pugParser;
   var t = babel.types;
@@ -92,9 +70,24 @@ var babelPlugin = function babelPlugin(babel, pugParser) {
   };
 };
 
-exports.default = function (babel, pugParser) {
-  if (pugParser) {
-    return babelPlugin.call(null, babel);
-  }
-  return babelPlugin.call(null, babel, pugParser);
-};
+var _commonPrefix = require('common-prefix');
+
+var _commonPrefix2 = _interopRequireDefault(_commonPrefix);
+
+var _parsePug = require('./parse-pug');
+
+var _parsePug2 = _interopRequireDefault(_parsePug);
+
+var _context = require('./context');
+
+var _context2 = _interopRequireDefault(_context);
+
+var _visitors = require('./visitors');
+
+var _interpolation = require('./utils/interpolation');
+
+var _jsx = require('./utils/jsx');
+
+var _babelTypes = require('./lib/babel-types');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
